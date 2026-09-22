@@ -398,7 +398,7 @@ Each analysis backend is separated into an MNA system container, an MNA builder,
 
 Generated build directories, compiled testbench generators, simulator outputs, plots, and other build artifacts may also be present in a working tree. They are not part of the logical source architecture.
 
-The root-level `alles.cpp` is a combined source snapshot and is not used by the CMake target. The simulator is built from the files under `src/`.
+The simulator is built from the files under `src/`.
 
 ## Requirements and Dependencies
 
@@ -620,7 +620,7 @@ tests/reference/
 tests/verifier/
 ```
 
-The repository contains deterministic C++ testbench generators for operating-point resistor networks, AC RLC networks, and a supported transient RLC network. Stored reference results are located in `tests/reference/`, and the numerical verifier compares generated output against those references.
+The repository contains deterministic C++ testbench generators for operating-point resistor networks, AC RLC networks, and a supported transient RLC network. The validated reference results are provided as downloadable assets through the corresponding GitHub Release. After downloading and extracting them into `tests/reference/`, the numerical verifier can compare newly generated output against the stored reference data.
 
 Run the complete test workflow from the repository root:
 
@@ -631,7 +631,7 @@ chmod +x tests/run_testbench.sh
 
 The transient regression test is deliberately based on a circuit known to work with the current SVD reduction. A passing result confirms the validated path, not arbitrary descriptor-system or RLC-topology support.
 
-Floating-point results may vary slightly with compiler version, Eigen version, processor architecture, sparse ordering, and optimization settings. Numerical tolerances should be used instead of exact textual equality.
+Floating-point results may vary slightly depending on the compiler version, Eigen version, processor architecture, sparse matrix ordering, and optimization settings. The provided numerical verifier accounts for small floating-point deviations by comparing generated results against the validated reference data using numerical tolerances rather than exact textual equality. The verifier must be built before running the testbench and is executed automatically by `run_testbench.sh`.
 
 ## External Simulator Comparison
 
@@ -650,8 +650,6 @@ AC performance is also promising, but depends strongly on the circuit and freque
 Transient analysis is still in development and is not currently suitable for meaningful comparative benchmarking. Its dense matrices, full SVD, and numerical sensitivity dominate runtime and scalability.
 
 Current development observations suggest that OP and AC numerical stability are broadly comparable to tested ngspice and Xyce cases, while LTspice is significantly more robust on difficult numerical cases. Transient numerical stability remains an active development area.
-
-Future public benchmarks should document simulator versions, compiler options, hardware, operating system, input netlists, matrix sizes, output settings, timing methodology, repetitions, and accuracy criteria.
 
 ## Current Limitations
 
@@ -718,45 +716,13 @@ FirstPass prioritizes:
 
 These goals take precedence over complete SPICE coverage, maximum performance, support for every valid topology, and industrial numerical robustness.
 
-## Possible Future Work
+## Feedback and Contributions
 
-- stronger netlist validation and structured parser errors
-- explicit solver-status checks
-- better singular-system diagnostics
-- true linear, octave, and list-based AC sweeps
-- exact inclusion of sweep endpoints
-- implemented DC sweep analysis
-- time-dependent independent sources
-- initial-condition handling
-- more robust transient DAE treatment
-- improved numerical rank selection
-- sparse transient matrices and scalable descriptor-system reduction
-- adaptive transient integration
-- improved CSV output performance
-- `.print`-based selective output
-- reproducible benchmark tooling
-- broader regression coverage
-- cross-platform continuous integration
+FirstPass is currently developed as a single-author educational and research project. A central goal of the project is to learn and document the implementation of a linear circuit simulator by developing its numerical methods, architecture, and supporting tools directly.
 
-These items describe possible directions, not committed features.
+For this reason, external code contributions and pull requests are not currently being accepted. Technical feedback, bug reports, numerical observations, and suggestions for possible improvements are nevertheless welcome through GitHub Issues.
 
-## Contributing
-
-Contributions that improve correctness, clarity, diagnostics, tests, or documentation are welcome.
-
-Before proposing a change:
-
-1. Build the current project.
-2. Run the existing testbench.
-3. Keep changes focused on one problem.
-4. Add or update a deterministic test where practical.
-5. Avoid changing reference data without explaining the mathematical reason.
-6. Document newly supported syntax or topology.
-7. Clearly distinguish complete implementations from experimental paths.
-
-For numerical changes, include the affected equation or algorithm, a minimal reproducing netlist, expected and actual results, matrix dimensions, relevant solver or rank information, and comparison data where available.
-
-Please preserve the project's emphasis on readable code and mathematically explicit implementation.
+The project is released under the MIT License, and users are welcome to fork the repository and develop independent modifications or extensions.
 
 ## License
 
