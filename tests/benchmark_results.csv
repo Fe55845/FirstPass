@@ -1,0 +1,6 @@
+Test: ,FirstPass,NGSpice,LTSpice,xyce,Performance Imporvement,NGSpice,xyce
+OP_Dense_small,0.004,0.011,,1.66,,2.75,415
+OP_Dense_big,0.028,0.369,,,,13.1785714285714,
+OP_Sparse,0.733,483.853,,25.34,,660.099590723056,34.5702592087312
+,,,,,,,
+AC_Sparse,132.328,14218.691,,,,107.450358200834,

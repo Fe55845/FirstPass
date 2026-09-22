@@ -1,0 +1,34 @@
+* Tran Analysis Testbench *
+V1 N0 0 1
+
+R1 N0 N1 1k
+L1 N1 N2 1m
+C1 N2 0 1u
+R2 N2 N3 1k
+L2 N3 N4 1m
+C2 N4 0 1u
+R3 N4 N5 1k
+L3 N5 N6 1m
+C3 N6 0 1u
+R4 N6 N7 1k
+L4 N7 N8 1m
+C4 N8 0 1u
+R5 N8 N9 1k
+L5 N9 N10 1m
+C5 N10 0 1u
+R6 N10 N11 1k
+L6 N11 N12 1m
+C6 N12 0 1u
+R7 N12 N13 1k
+L7 N13 N14 1m
+C7 N14 0 1u
+R8 N14 N15 1k
+L8 N15 N16 1m
+C8 N16 0 1u
+R9 N16 N17 1k
+L9 N17 N18 1m
+C9 N18 0 1u
+
+.tran 0 0.3 0 startup
+.print tran V(N18)
+.end
