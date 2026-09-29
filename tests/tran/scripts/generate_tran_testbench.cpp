@@ -65,7 +65,7 @@
 /**
  * Number of generated network columns.
  */
-const uint32_t num_of_columns = 10;
+const uint32_t num_of_columns = 1000;
 
 int main()
 {
@@ -107,7 +107,7 @@ int main()
             << " "
             << "N" << 2 * column
             << " N" << 2 * column + 1
-            << " 1k\n";
+            << " 1\n";
 
         next_resistor_index++;
 

@@ -96,9 +96,10 @@ public:
         // Full U and V matrices are required to extract null space bases U2 and V2
         Eigen::BDCSVD<Eigen::MatrixXd, Eigen::ComputeFullU | Eigen::ComputeFullV> svd(mna_equation->C);
 
-        svd.setThreshold(std::numeric_limits<double>::epsilon());
-
         const Eigen::VectorXd singularValues = svd.singularValues();
+
+        svd.setThreshold(singularValues[0]*10e-10);
+
         const Eigen::MatrixXd U = svd.matrixU();
         const Eigen::MatrixXd V = svd.matrixV();
 

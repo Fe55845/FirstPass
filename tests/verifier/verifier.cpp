@@ -59,6 +59,7 @@
 #include <cstdlib>
 #include <fstream>
 #include <iostream>
+#include <iomanip>
 #include <sstream>
 #include <string>
 #include <vector>
@@ -313,8 +314,8 @@ int main(int argc, char* argv[])
     std::cout << "----------------------------------------\n";
     std::cout << "Verification completed successfully.\n";
     std::cout << "----------------------------------------\n";
-    std::cout << "Relative error: " << error_percentage << " %\n";
-    std::cout << "Match score:    " << match_percentage << " %\n\n";
+    std::cout << "Relative error: " << std::setprecision(20) << error_percentage << " %\n";
+    std::cout << "Match score:    " << std::setprecision(20) << match_percentage << " %\n\n";
 
     return EXIT_SUCCESS;
 }
